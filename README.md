@@ -1,6 +1,6 @@
-# apps
+# Datapad Frontend Assessment: Base Project Template
 
-This monorepo contains datapad mobile and web apps, including our common core layer for clients.
+This monorepo contains multiple client apps in addition to a common core layer for clients.
 
 You can read each project's respective README file located in its directory to read instructions and details.
 
