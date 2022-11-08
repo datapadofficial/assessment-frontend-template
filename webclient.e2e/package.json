@@ -1,0 +1,13 @@
+{
+  "name": "datapad-web.e2e",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "cypress open",
+    "test": "CYPRESS_BASE_URL=http://localhost:3000 cypress run",
+    "test:record": "CYPRESS_BASE_URL=http://localhost:3000 cypress run --record"
+  },
+  "devDependencies": {
+    "cypress": "^10.4.0",
+    "typescript": "^4.7.4"
+  }
+}

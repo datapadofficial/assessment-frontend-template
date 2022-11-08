@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"],
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": [
+        "../core/src/*"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../core"
+    }
+  ],
+  "include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "core",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run build",
+    "build": "tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cleanup": "rm -rf dist/"
+  },
+  "author": "Eser Ozvataf <eser@ozvataf.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/jest": "^29.2.2",
+    "@types/react": "^18.0.25",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "color": "^4.2.3"
+  },
+  "peerDependencies": {
+    "react": "18.2.0"
+  }
+}

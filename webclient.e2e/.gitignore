@@ -1,0 +1,14 @@
+# dependencies
+/node_modules
+
+# misc
+.DS_Store
+*.pem
+
+# local env files
+.env.*.local
+.env.local
+
+# cypress outputs
+cypress/screenshots/
+cypress/videos/

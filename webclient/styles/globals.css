@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .datapad-button {
+    @apply text-white bg-vegan-green-600 hover:bg-vegan-green-500 rounded-md shadow font-semibold;
+  }
+}
