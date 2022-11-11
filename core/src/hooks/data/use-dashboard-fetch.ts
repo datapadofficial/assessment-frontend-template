@@ -5,12 +5,12 @@ type Dashboard = any;
 const useDashboardFetch = (
   workspaceId: string,
   dashboardId: string,
-  immediate?: boolean,
+  immediate?: boolean
 ) => {
   return useFetcher<Dashboard>(
     "GET",
     `/v2/workspaces/${workspaceId}/dashboards/${dashboardId}`,
-    { immediate, cacheRequest: false },
+    { immediate, cacheRequest: false }
   );
 };
 
@@ -32,19 +32,19 @@ function mockDashboardFetch() {
             icon: "🔥",
             data: [
               {
-                "name": "Metric 1-1",
-                "time": new Date("2022-08-19T00:52:04Z"),
-                "value": 100,
+                name: "Metric 1-1",
+                time: new Date("2022-08-19T00:52:04Z"),
+                value: 100,
               },
               {
-                "name": "Metric 1-2",
-                "time": new Date("2022-08-20T00:52:04Z"),
-                "value": 200,
+                name: "Metric 1-2",
+                time: new Date("2022-08-20T00:52:04Z"),
+                value: 200,
               },
               {
-                "name": "Metric 1-3",
-                "time": new Date("2022-08-21T00:52:04Z"),
-                "value": 300,
+                name: "Metric 1-3",
+                time: new Date("2022-08-21T00:52:04Z"),
+                value: 300,
               },
             ],
             // chart_type: "SINGLE_VALUE_CHART",
@@ -65,19 +65,19 @@ function mockDashboardFetch() {
             icon: "💧",
             data: [
               {
-                "name": "Metric 1-1",
-                "time": new Date("2022-08-19T00:52:04Z"),
-                "value": 100,
+                name: "Metric 1-1",
+                time: new Date("2022-08-19T00:52:04Z"),
+                value: 100,
               },
               {
-                "name": "Metric 1-2",
-                "time": new Date("2022-08-20T00:52:04Z"),
-                "value": 200,
+                name: "Metric 1-2",
+                time: new Date("2022-08-20T00:52:04Z"),
+                value: 200,
               },
               {
-                "name": "Metric 1-3",
-                "time": new Date("2022-08-21T00:52:04Z"),
-                "value": 300,
+                name: "Metric 1-3",
+                time: new Date("2022-08-21T00:52:04Z"),
+                value: 300,
               },
             ],
             chart_type: "BAR_CHART",
@@ -183,17 +183,14 @@ function mockDashboardFetch() {
         },
       };
 
-      return new Response(
-        JSON.stringify(mockContent),
-        {
-          status: 200,
-          statusText: "OK",
-          headers: {
-            "content-type": "application/json",
-          },
+      return new Response(JSON.stringify(mockContent), {
+        status: 200,
+        statusText: "OK",
+        headers: {
+          "content-type": "application/json",
         },
-      );
-    },
+      });
+    }
   );
 }
 
