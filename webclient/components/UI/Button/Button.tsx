@@ -19,7 +19,7 @@ const Button = ({
   className,
   spinnerClassName,
   loading,
-  buttonImage
+  buttonImage,
 }: ButtonProps) => {
   return (
     <button
@@ -51,12 +51,8 @@ const Button = ({
       )}
       {title}
       {buttonImage && (
-        <span className="ml-2 flex align-center">
-          {buttonImage}
-        </span>
-        
+        <span className="ml-2 flex align-center">{buttonImage}</span>
       )}
-      
     </button>
   );
 };

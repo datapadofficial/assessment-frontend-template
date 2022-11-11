@@ -6,13 +6,14 @@ import Title from "@webclient/components/UI/Title/Title";
 import { useDashboardFetch } from "@core/hooks/data/use-dashboard-fetch";
 import Link from "next/link";
 import { MetricChart } from "@webclient/components/Dashboards/MetricChart";
+import { PlusIcon } from "@heroicons/react/solid";
 
 function DashboardInner(props) {
   const { workspaceid, dashboardid } = props;
 
   const { isError, error, isSuccess, status, data } = useDashboardFetch(
     workspaceid as string,
-    dashboardid as string,
+    dashboardid as string
   );
 
   if (isError) {
@@ -25,11 +26,23 @@ function DashboardInner(props) {
 
   return (
     <>
-      <Title
-        icon={data.icon}
-        title={data.title}
-        subtitle={data.description}
-      />
+      <div className="w-full flex flex-row justify-between items-start">
+        <Title
+          icon={data.icon}
+          title={data.title}
+          subtitle={data.description}
+        />
+
+        <Button
+          className="datapad-button"
+          loading={false}
+          title="Add New KPI"
+          buttonImage={<PlusIcon className="h-4 w-4" />}
+          onClick={() => {
+            console.log("Add New KPI button clicked");
+          }}
+        />
+      </div>
 
       <div className="grid grid-flow-row-dense grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
         {Object.entries(data.metrics).map(([metricId, metric]) => {
