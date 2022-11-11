@@ -7,9 +7,12 @@ import { useDashboardFetch } from "@core/hooks/data/use-dashboard-fetch";
 import Link from "next/link";
 import { MetricChart } from "@webclient/components/Dashboards/MetricChart";
 import { PlusIcon } from "@heroicons/react/solid";
+import AddNewKpiSidePanel from "@webclient/components/AddNewKpi/AddNewKpiSidePanel";
+import { useState } from "react";
 
 function DashboardInner(props) {
   const { workspaceid, dashboardid } = props;
+  const [showSidePanel, setShowSidePanel] = useState(false);
 
   const { isError, error, isSuccess, status, data } = useDashboardFetch(
     workspaceid as string,
@@ -39,7 +42,7 @@ function DashboardInner(props) {
           title="Add New KPI"
           buttonImage={<PlusIcon className="h-4 w-4" />}
           onClick={() => {
-            console.log("Add New KPI button clicked");
+            setShowSidePanel(true);
           }}
         />
       </div>
@@ -49,6 +52,12 @@ function DashboardInner(props) {
           return <MetricChart key={metricId} metric={metric} />;
         })}
       </div>
+      {showSidePanel && (
+        <AddNewKpiSidePanel
+          showSidePanel={showSidePanel}
+          setShowSidePanel={setShowSidePanel}
+        />
+      )}
     </>
   );
 }
