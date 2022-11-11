@@ -52,12 +52,11 @@ function DashboardInner(props) {
           return <MetricChart key={metricId} metric={metric} />;
         })}
       </div>
-      {showSidePanel && (
-        <AddNewKpiSidePanel
-          showSidePanel={showSidePanel}
-          setShowSidePanel={setShowSidePanel}
-        />
-      )}
+      <AddNewKpiSidePanel
+        workspaceid={workspaceid}
+        showSidePanel={showSidePanel}
+        setShowSidePanel={setShowSidePanel}
+      />
     </>
   );
 }
