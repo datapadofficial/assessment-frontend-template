@@ -13,7 +13,8 @@ export default function WorkspacePage() {
   return (
     <>
       <Head>
-        <title>Datapad - Workspace #{workspaceid}</title>
+        <title>{`Datapad - Workspace #${workspaceid}`}</title>
+
         <meta
           name="description"
           content={`Datapad - Workspace #${workspaceid}`}
