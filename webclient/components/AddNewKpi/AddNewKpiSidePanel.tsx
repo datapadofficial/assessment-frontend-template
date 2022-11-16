@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import { useMetricsAllFetch } from "@core/hooks/data/use-metrics-all-fetch";
@@ -8,12 +8,14 @@ type Props = {
   workspaceid: string;
   showSidePanel: boolean;
   setShowSidePanel: (arg0: boolean) => void;
+  addMetricToDashboardData: (arg0: any) => void;
 };
 
 const AddNewKpiSidePanel: FC<Props> = ({
   workspaceid,
   showSidePanel,
   setShowSidePanel,
+  addMetricToDashboardData,
 }) => {
   const { isError, error, isSuccess, status, data } =
     useMetricsAllFetch(workspaceid);
@@ -21,8 +23,6 @@ const AddNewKpiSidePanel: FC<Props> = ({
   const closeSidePanel = () => {
     setShowSidePanel(false);
   };
-
-  console.log(data);
 
   return (
     <Transition show={showSidePanel} className="fixed inset-0">
@@ -49,12 +49,12 @@ const AddNewKpiSidePanel: FC<Props> = ({
         leaveFrom="-translate-x-0"
         leaveTo="translate-x-full"
       >
-        <div className="fixed h-screen w-[600px] z-10 top-0 right-0 bg-white shadow-lg px-8 py-12 overflow-y-scroll">
+        <div className="fixed h-screen w-[600px] z-10 top-0 right-0 bg-white shadow-lg px-12 py-16 overflow-y-scroll">
           <XIcon
-            className="h-6 w-6 text-gray-600 hover:text-black cursor-pointer absolute top-8 right-8"
+            className="h-6 w-6 text-gray-600 hover:text-black cursor-pointer fixed top-8 right-8"
             onClick={closeSidePanel}
           />
-          <div className="flex flex-col justify-start items-start gap-y-8">
+          <div className="flex flex-col justify-start items-start gap-y-8 w-full">
             {isError && <div>error: {JSON.stringify(error)}</div>}
             {!isSuccess ||
               (data === undefined && <div>status: {status}...</div>)}
@@ -62,7 +62,11 @@ const AddNewKpiSidePanel: FC<Props> = ({
               data &&
               data.map((metric, idx) => {
                 return (
-                  <div key={idx} className="shadow-lg rounded-lg">
+                  <div
+                    key={idx}
+                    className="shadow-lg rounded-lg w-full"
+                    onClick={() => addMetricToDashboardData(metric)}
+                  >
                     <MetricChart metric={metric} />
                   </div>
                 );

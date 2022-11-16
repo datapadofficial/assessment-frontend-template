@@ -8,22 +8,36 @@ import Link from "next/link";
 import { MetricChart } from "@webclient/components/Dashboards/MetricChart";
 import { PlusIcon } from "@heroicons/react/solid";
 import AddNewKpiSidePanel from "@webclient/components/AddNewKpi/AddNewKpiSidePanel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function DashboardInner(props) {
   const { workspaceid, dashboardid } = props;
   const [showSidePanel, setShowSidePanel] = useState(false);
+  const [dashboardData, setDashboardData] = useState<any | null>(null);
 
   const { isError, error, isSuccess, status, data } = useDashboardFetch(
     workspaceid as string,
     dashboardid as string
   );
 
+  useEffect(() => {
+    if (isSuccess && data) {
+      setDashboardData(data);
+    }
+  }, [isSuccess, data]);
+  console.log(dashboardData);
+
+  const addMetricToDashboardData = (metric) => {
+    setDashboardData((prevState) => {
+      return { ...prevState, metrics: [...prevState.metrics, metric] };
+    });
+  };
+
   if (isError) {
     return <>error: {JSON.stringify(error)}</>;
   }
 
-  if (!isSuccess || data === undefined) {
+  if (!isSuccess || data === undefined || dashboardData === null) {
     return <>status: {status}...</>;
   }
 
@@ -48,7 +62,7 @@ function DashboardInner(props) {
       </div>
 
       <div className="grid grid-flow-row-dense grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
-        {Object.entries(data.metrics).map(([metricId, metric]) => {
+        {Object.entries(dashboardData.metrics).map(([metricId, metric]) => {
           return <MetricChart key={metricId} metric={metric} />;
         })}
       </div>
@@ -56,6 +70,7 @@ function DashboardInner(props) {
         workspaceid={workspaceid}
         showSidePanel={showSidePanel}
         setShowSidePanel={setShowSidePanel}
+        addMetricToDashboardData={addMetricToDashboardData}
       />
     </>
   );
