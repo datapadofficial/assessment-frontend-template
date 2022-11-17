@@ -55,7 +55,7 @@ function GetParametersByChartType(chartType) {
 }
 
 function MetricChart(props) {
-  const { metric } = props;
+  const { metric, disableResizing = false } = props;
   const params = GetParametersByChartType(metric.chart_type);
 
   const sizes = ["small", "medium", "large"];
@@ -71,16 +71,14 @@ function MetricChart(props) {
     <div
       className={classNames([
         "flex flex-col h-full shadow-sm dark:bg-slate-800 bg-white rounded-lg p-4 group",
-        (size === "medium") && "col-span-2 row-span-1",
-        (size === "large") && "col-span-3 row-span-2",
+        size === "medium" && "col-span-2 row-span-1",
+        size === "large" && "col-span-3 row-span-2",
       ])}
     >
       <div className="flex justify-between">
         <div>
           <Conditional if={params.showGoal}>
-            <h3 className="text-lg">
-              {props.metric.goal}
-            </h3>
+            <h3 className="text-lg">{props.metric.goal}</h3>
           </Conditional>
           <h3
             className={classNames([
@@ -93,21 +91,23 @@ function MetricChart(props) {
           <Conditional if={params.showDate}>
             <h3 className="mt-2 text-base text-gray-400">
               {dateFormatter(
-                props.metric.sys.updated_at ?? props.metric.sys.created_at,
+                props.metric.sys.updated_at ?? props.metric.sys.created_at
               )}
             </h3>
           </Conditional>
         </div>
-        <div className="h-4 w-4 text-slate-400">
-          <Link href=".">
-            <a
-              onClick={(e) => resizeClick(e)}
-              className="hidden group-hover:block"
-            >
-              <ArrowsExpandIcon />
-            </a>
-          </Link>
-        </div>
+        {!disableResizing && (
+          <div className="h-4 w-4 text-slate-400">
+            <Link href=".">
+              <a
+                onClick={(e) => resizeClick(e)}
+                className="hidden group-hover:block"
+              >
+                <ArrowsExpandIcon />
+              </a>
+            </Link>
+          </div>
+        )}
       </div>
 
       <div className="grow flex flex-col justify-center">

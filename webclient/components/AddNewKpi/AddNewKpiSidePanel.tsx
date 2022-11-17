@@ -3,6 +3,7 @@ import { Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import { useMetricsAllFetch } from "@core/hooks/data/use-metrics-all-fetch";
 import MetricChart from "../Dashboards/MetricChart";
+import Button from "../UI/Button/Button";
 
 type Props = {
   workspaceid: string;
@@ -21,6 +22,11 @@ const AddNewKpiSidePanel: FC<Props> = ({
     useMetricsAllFetch(workspaceid);
 
   const closeSidePanel = () => {
+    setShowSidePanel(false);
+  };
+
+  const addMetricHandleClick = (metric) => {
+    addMetricToDashboardData(metric);
     setShowSidePanel(false);
   };
 
@@ -64,10 +70,17 @@ const AddNewKpiSidePanel: FC<Props> = ({
                 return (
                   <div
                     key={idx}
-                    className="shadow-lg rounded-lg w-full"
-                    onClick={() => addMetricToDashboardData(metric)}
+                    className="relative group shadow-lg rounded-lg w-full"
                   >
-                    <MetricChart metric={metric} />
+                    <div className="hidden group-hover:flex absolute w-full h-full bg-black/30 rounded-lg justify-center items-center">
+                      <Button
+                        className="datapad-button"
+                        loading={false}
+                        title="Add to Dashboard"
+                        onClick={() => addMetricHandleClick(metric)}
+                      />
+                    </div>
+                    <MetricChart metric={metric} disableResizing={true} />
                   </div>
                 );
               })}
